@@ -6,13 +6,14 @@
 			<div class="col-12">
 				{% if isSubmitted %}
 					<div class="card mb-3">
-						<div class="card-body">
+						<div class="card-body p-4">
+						<h2 class=" mb-3">{{previousCountry}}'s Capital City</h2>
 							{% if isGood %}
-								<p>Good ! Yes it is
+								<p class="text-success">Good ! Yes it is
 									{{previousGoodAnswer }}
 									!</p>
 							{% else %}
-								<p>You fail ! The answer was
+								<p class="text-warning">You failed ! The answer was
 									{{previousGoodAnswer }}</p>
 							{% endif %}
 						</div>
@@ -20,8 +21,9 @@
 				{% endif %}
 
 				<div class="card">
-					<div class="card-body">
-						<h1 class="card-title">{{country.name}}</h1>
+					<div class="card-body p-4">
+					<h1 class="card-title mb-3">New game : find the capital city</h1>
+						<h2 class=" mb-3">{{country.name}}</h2>
 						{{ form_start(form) }}
 						<div class="mb-3 d-flex flex-row">
 							{{ form_widget(form.selectedOption) }}

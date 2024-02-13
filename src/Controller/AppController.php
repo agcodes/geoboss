@@ -8,7 +8,6 @@ use App\Services\RestCountriesService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Services\SecretService;
 
 class AppController extends AbstractController
 {
@@ -49,48 +48,43 @@ class AppController extends AbstractController
 	#[Route('/capitals-quiz')]
 	public function capitalsQuiz(
 		Request $request,
-		SecretService $secretService,
 		RestCountriesService $restCountriesService
 	): Response {
 
 		$previousGoodAnswer = '';
+		$previousCountry = '';
 		$isSubmitted = false;
 		$isGood = false;
 
 		if ($request->getContent() != null) {
 			$formData = $request->request->all();
-			if (isset($formData['capitals_radio_button_form']['secretAnswer'])) {
-				$previousGoodAnswer = $secretService->decryptIt($formData['capitals_radio_button_form']['secretAnswer']);
-
+			if (isset($formData['capitals_radio_button_form']['country_name'])) {
+				$previousCountry = $formData['capitals_radio_button_form']['country_name'];
+				$country = $restCountriesService->getCountry($previousCountry);
+				$previousGoodAnswer = $country->capital;
 				$isSubmitted = true;
-				if (isset($formData['capitals_radio_button_form']['selectedOption'])) {
-					if ($formData['capitals_radio_button_form']['selectedOption'] == $previousGoodAnswer) {
-						$isGood = true;
-					} else {
-						$isGood = false;
-					}
-				}
+				
+				$isGood =  (isset($formData['capitals_radio_button_form']['selectedOption']))
+				&& ($formData['capitals_radio_button_form']['selectedOption'] == $previousGoodAnswer);
 			}
 		}
-
-		
-		$choices = [];
 
 		$countries = $restCountriesService->getRandomCountries(4);
 		if (empty($countries)){
 			throw new \Exception('Something went wrong!');
 		}
 		$savedCountry = $countries[0];
-		$secretCapital = $secretService->encryptIt($savedCountry->capital);
 
 		shuffle($countries);
+		
+		$choices = [];
 		foreach ($countries as $country) {
 			$choices[$country->capital] = $country->capital;
 		}
 
 		$form = $this->createForm(CapitalsRadioButtonFormType::class, null, [
 			'choices' => $choices,
-			'secretAnswer' => $secretCapital,
+			'country_name' => $savedCountry->name,
 			'method' => 'POST'
 		]);
 
@@ -99,7 +93,8 @@ class AppController extends AbstractController
 			'form' => $form->createView(),
 			'isSubmitted' => $isSubmitted,
 			'isGood' => $isGood,
-			'previousGoodAnswer' => $previousGoodAnswer
+			'previousGoodAnswer' => $previousGoodAnswer,
+			'previousCountry'=>$previousCountry
 		]);
 	}
 }

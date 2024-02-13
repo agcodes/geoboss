@@ -1,3 +1,16 @@
 body {
     background-color: skyblue;
 }
+
+input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"] + label {
+    padding: 0.3rem 0.5rem;
+    border: 1px dashed #ccc;
+  }
+  input[type="radio"]:checked + label {
+    border: 1px solid #000;
+    background-color: #0d6efd;
+    color:white;
+  }

@@ -23,8 +23,8 @@ class CapitalsRadioButtonFormType extends AbstractType
 				//'class' => 'form-control', // Add your CSS classes here
 			]
 			])
-			->add('secretAnswer', HiddenType::class, [
-				'data' => $options['secretAnswer']
+			->add('country_name', HiddenType::class, [
+				'data' => $options['country_name']
 			])
 			->add('submit', SubmitType::class, [
 				'label' => 'Submit',
@@ -38,7 +38,7 @@ class CapitalsRadioButtonFormType extends AbstractType
 	{
 		$resolver->setDefaults([
 			'method' => 'POST',
-			'secretAnswer' => '',
+			'country_name' => '',
 			'choices' => [], // Default empty array for choices
 		]);
 	}

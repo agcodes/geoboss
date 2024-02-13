@@ -10,15 +10,18 @@ final class RestCountriesService
 	private $httpClient;
 	private $baseUrl;
 
-	public function __construct(string $url)
+	public function __construct(string $url, bool $mockAPI)
 	{
 		$this->httpClient = new Client();
 		$this->baseUrl = $url;
+		if ($mockAPI){
+			$this->baseUrl = str_replace("SERVER_NAME", $_SERVER['SERVER_NAME'], $this->baseUrl);
+		}
 	}
 
 	public function getCountries(): array
 	{
-		$response = $this->httpClient->get($this->baseUrl . 'all');
+		$response = $this->httpClient->get($this->baseUrl);
 		$results = json_decode($response->getBody()->getContents(), true);
 
 		$countries = [];
@@ -35,10 +38,23 @@ final class RestCountriesService
 		return $countries;
 	}
 
+	public function getCountry(string $name): Country
+	{
+		$countries = $this->getCountries();
+		if (is_array($countries)) {
+			$foundKey = array_search( $name, array_column($countries, 'name'));
+			if ($foundKey>0){
+				return $countries[$foundKey];
+			}
+		}
+		return new Country([]);
+	}
+
 	public function getRandomCountry(): Country
 	{
 		$countries = $this->getCountries();
 		if (is_array($countries)) {
+			// todo : best random ?
 			shuffle($countries);
 			return $countries[0];
 		}
@@ -50,17 +66,13 @@ final class RestCountriesService
 		$countries = $this->getCountries();
 		$selectedCountries = [];
 		if (is_array($countries) && count($countries) >= $nb) {
+			// todo : best random ?
 			shuffle($countries);
+			// take nb countries
 			for ($i = 0; $i < $nb; $i++) {
 				$selectedCountries[] = $countries[$i];
 			}
 		}
 		return $selectedCountries;
-	}
-
-	public function getCountryByName($name)
-	{
-		$response = $this->httpClient->get($this->baseUrl . 'name/' . $name);
-		return json_decode($response->getBody()->getContents(), true);
 	}
 }
