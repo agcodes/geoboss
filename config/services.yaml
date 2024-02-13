@@ -4,7 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+  app.rest_countries_api_url: https://restcountries.com/v3.1/
+  app.secret_service_key: 15165efzaef6966
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -19,6 +20,14 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Services\RestCountriesService:
+        public: true
+        arguments:
+            $url: '%app.rest_countries_api_url%'  
+    App\Services\SecretService:
+        public: true
+        arguments:
+            $cryptKey: '%app.secret_service_key%'  
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

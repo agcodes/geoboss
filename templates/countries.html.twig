@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div>Countries</div>
+	<ol>
+		{% if countries is defined and countries != null and countries is iterable %}
+			{% for country in countries %}
+				<li>{{ country.name}}</li>
+			{% endfor %}
+		{% endif %}
+	</ol>
+{% endblock %}

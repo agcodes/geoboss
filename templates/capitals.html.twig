@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div>Capitals</div>
+	<ol>
+		{% if countries is defined and countries != null and countries is iterable %}
+			{% for country in countries %}
+				<li>{{ country.name}}
+					-
+					{{ country.capitals[0]}}
+				</li>
+			{% endfor %}
+		{% endif %}
+	</ol>
+{% endblock %}

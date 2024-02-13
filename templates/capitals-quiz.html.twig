@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				{% if isSubmitted %}
+					<div class="card mb-3">
+						<div class="card-body">
+							{% if isGood %}
+								<p>Good ! Yes it is
+									{{previousGoodAnswer }}
+									!</p>
+							{% else %}
+								<p>You fail ! The answer was
+									{{previousGoodAnswer }}</p>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+
+				<div class="card">
+					<div class="card-body">
+						<h1 class="card-title">{{country.name}}</h1>
+						{{ form_start(form) }}
+						<div class="mb-3 d-flex flex-row">
+							{{ form_widget(form.selectedOption) }}
+						</div>
+						{{ form_errors(form.selectedOption) }}
+						<div class="mb-3">
+							{{ form_widget(form.submit) }}
+						</div>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
