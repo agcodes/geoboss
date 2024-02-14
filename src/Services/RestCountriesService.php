@@ -14,19 +14,6 @@ final class RestCountriesService
 	{
 		$this->httpClient = new Client();
 		$this->baseUrl = $url;
-		if ($mockAPI){
-			$this->baseUrl = str_replace("SERVER_NAME", $this->getServerUrl(), $this->baseUrl);
-		}
-	}
-
-	private function getServerUrl() : string
-	{
-	  $protocol = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) ? 'https://' : 'http://';
-	  $server = $_SERVER['SERVER_NAME'];
-	  
-	 return $protocol.$server;
-	  //$port = $_SERVER['REMOTE_PORT'] ;
-	  //return $protocol.$server.$port;
 	}
 
 	public function getCountries(): array

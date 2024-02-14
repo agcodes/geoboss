@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,6 +27,9 @@ class CapitalsRadioButtonFormType extends AbstractType
 			->add('country_name', HiddenType::class, [
 				'data' => $options['country_name']
 			])
+			->add('flag', HiddenType::class, [
+				'data' => $options['flag']
+			])
 			->add('submit', SubmitType::class, [
 				'label' => 'Submit',
 				'attr' => [
@@ -39,6 +43,7 @@ class CapitalsRadioButtonFormType extends AbstractType
 		$resolver->setDefaults([
 			'method' => 'POST',
 			'country_name' => '',
+			'flag'=> '',
 			'choices' => [], // Default empty array for choices
 		]);
 	}
