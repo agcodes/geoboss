@@ -30,7 +30,7 @@ Assurez-vous d'avoir installé les éléments suivants avant de commencer :
 
 - ouvrir le projet dans votre IDE
 - démarrer serveur local avec **symfony server:start**
-    - "OK] Web server listening                                                                                              
+    - [OK] Web server listening                                                                                              
     - "The Web server is using PHP CLI 8.3.2                                                                             
     - "http://127.0.0.1:8000   
 
