@@ -9,22 +9,26 @@ Ce projet est une application web développée en utilisant le framework Symfony
 Assurez-vous d'avoir installé les éléments suivants avant de commencer :
 
 - [PHP >= 8.2](https://windows.php.net/download#php-8.3)
-- -- cmd **php -v**
-- -- si ereur : [Visual c++](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+- -- pour vérifier l'installation, cmd **php -v**
+- -- si ereur MVCR110.dll : [Visual c++](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 - -- activer extension curl (décommenter extension=curl)
 - -- 
 - [Composer](https://getcomposer.org/download/)
-- -- cmd **composer -v**
+- -- pour vérifier l'installation, cmd **composer -v**
 - [Symfony CL I (pour une installation plus rapide)](https://symfony.com/download)
 - -- utiliser [scoop](https://scoop.sh/) 
-
+- -- pour vérifier l'installation, cmd **symfony -v**
+- 
 ## Installation
 
 - Pour mettre à jour les packages, cmd **composer update**
 
 ## Développement
 
-- cmd **symfony server:start**
+- démarrer serveur local avec **symfony server:start**
+- "OK] Web server listening                                                                                              
+- "The Web server is using PHP CLI 8.3.2                                                                             
+- "http://127.0.0.1:8000   
 
 ## Obtenir des packages
 
