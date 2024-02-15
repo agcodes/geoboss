@@ -1,6 +1,5 @@
 body {
-  
-   
+  s
 }
 
 input[type="radio"] {
@@ -8,12 +7,14 @@ input[type="radio"] {
   }
   input[type="radio"] + label {
     padding: 0.3rem 0.5rem;
-    border: 1px dashed #ccc;
+    border: 1px dashed blue;
     cursor:pointer;
+    font-size:50px;
   }
   input[type="radio"]:checked + label {
     border: 1px solid #000;
     background-color: #0d6efd;
     color:white;
     cursor:pointer;
+    font-size:50px;
   }

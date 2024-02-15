@@ -15,7 +15,6 @@ class PortfolioController extends AbstractController
     #[Route('/portfolio/cv')]
 	public function cv(LoggerInterface $logger): Response
 	{
-        $logger->info('I just got the logger');
 		$number = random_int(0, 100);
 
 		return $this->render('portfolio/cv.html.twig', [
@@ -23,4 +22,24 @@ class PortfolioController extends AbstractController
 		]);
 	}
 
+	#[Route('/portfolio/contact')]
+	public function contact(LoggerInterface $logger): Response
+	{
+        $logger->info('I just got the logger');
+		$number = random_int(0, 100);
+
+		$testString = $this->test($logger, [], 9, 888, 888);
+
+		return $this->render('portfolio/contact.html.twig', [
+			'number' => $number,
+			'testString' => $testString
+		]);
+	}
+
+	private function test(LoggerInterface $logger, array $testArray, int $testInt, string $testString, float $testFloat)
+	{
+		$calcul = $testInt+$testFloat;
+		
+		return $calcul;
+	}
 }

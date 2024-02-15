@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\CapitalsRadioButtonFormType;
+use App\Form\FlagsRadioButtonFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\RestCountriesService;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,7 @@ class CountriesController extends AbstractController
 		]);
 	}
 
+	
 	#[Route('/countries/capitals')]
 	public function capitals(RestCountriesService $restCountriesService): Response
 	{
@@ -42,6 +44,62 @@ class CountriesController extends AbstractController
 		}
 		return $this->render('countries/capitals.html.twig', [
 			'countries' => $countries
+		]);
+	}
+
+	#[Route('/countries/flags-quiz')]
+	public function flagsQuiz(
+		Request $request,
+		RestCountriesService $restCountriesService
+	): Response {
+
+		$previousGoodAnswer = '';
+		$previousCountryName = '';
+		$isSubmitted = false;
+		$isGood = false;
+
+		if ($request->getContent() != null) {
+			$formData = $request->request->all();
+			if (isset($formData['flags_radio_button_form']['country_name'])) {
+				$previousCountryName = $formData['flags_radio_button_form']['country_name'];
+				$country = $restCountriesService->getCountry($previousCountryName);
+				$previousGoodAnswer = $country->flag;
+				$isSubmitted = true;
+				
+				$isGood = (isset($formData['flags_radio_button_form']['selectedOption']))
+				&& ($formData['flags_radio_button_form']['selectedOption'] == $previousGoodAnswer);
+			}
+		}
+
+		$countries = $restCountriesService->getRandomCountries(7);
+		if (empty($countries)){
+			throw new \Exception('Something went wrong!');
+		}
+
+		// save the first
+		$savedCountry = $countries[0];
+
+		// shuffle choices
+		shuffle($countries);
+		$choices = [];
+		foreach ($countries as $country) {
+			$choices[$country->flag] = $country->flag;
+		}
+
+		$form = $this->createForm(FlagsRadioButtonFormType::class, null, [
+			'choices' => $choices,
+			'country_name' => $savedCountry->name,
+			'method' => 'POST',
+			'flag' => $savedCountry->flag
+		]);
+
+		return $this->render('countries/flags-quiz.html.twig', [
+			'country' => $savedCountry,
+			'form' => $form->createView(),
+			'isSubmitted' => $isSubmitted,
+			'isGood' => $isGood,
+			'previousGoodAnswer' => $previousGoodAnswer,
+			'previousCountryName'=>$previousCountryName
 		]);
 	}
 
