@@ -8,7 +8,7 @@ Ce projet est une application web développée en utilisant le framework Symfony
 
 Assurez-vous d'avoir installé les éléments suivants avant de commencer :
 
-- [PHP >= 8.2](https://windows.php.net/download#php-8.3)
+- [PHP >= 8.3](https://windows.php.net/download#php-8.3)
   - pour vérifier l'installation, cmd **php -v**
   - si ereur MVCR110.dll : [Visual c++](https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist?view=msvc-170)
   - activer extension curl (décommenter extension=curl)
