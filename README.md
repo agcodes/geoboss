@@ -2,8 +2,6 @@
 
 Ce projet est une application web développée en utilisant le framework Symfony.
 
-- [Setup](https://symfony.com/doc/current/setup.html)
-
 ## Prérequis
 
 Assurez-vous d'avoir installé les éléments suivants avant de commencer :
@@ -21,10 +19,6 @@ Assurez-vous d'avoir installé les éléments suivants avant de commencer :
       - **curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | sudo -E bash**
       - **sudo apt install symfony-cli**
   - pour vérifier l'installation, cmd **symfony -v**
-
-## Installation
-
-- Pour mettre à jour les packages, cmd **composer update**
 
 ## Développement
 
@@ -46,8 +40,11 @@ Assurez-vous d'avoir installé les éléments suivants avant de commencer :
 - Basé sur les données de l'api https://restcountries.com/
 - Les données all sont copiées en local pour le développement. Elles sont disponibles en ligne à l'adresse https://restcountries.com/v3.1/all
 
-## Install linux
 
-- sudo apt install php8.2-xml
-- sudo apt install php8.3-xml
-- sudo apt install php8.3-xdebug
+## Mise à jour (facultatif)
+
+- Pour mettre à jour les packages, cmd **composer update**
+
+## Symfony
+
+- [Page Setup](https://symfony.com/doc/current/setup.html)
