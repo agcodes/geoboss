@@ -5,7 +5,17 @@
 	<ol class="list-group">
 		{% if countries is defined and countries != null and countries is iterable %}
 			{% for country in countries %}
-				<li class="list-group-item">{{ country.name}} - {{ country.capital}} - {{ country.flag}} - {{ country.region}} - {{country.area}} km<sup>2</sup></li>
+				<li class="list-group-item">{{ country.name}}
+					-
+					{{ country.capital}}
+					-
+					{{ country.flag}}
+					-
+					{{ country.region}}
+					-
+					{{country.area}}
+					km<sup>2</sup>
+				</li>
 			{% endfor %}
 		{% endif %}
 	</ol>
