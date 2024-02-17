@@ -45,6 +45,12 @@ Assurez-vous d'avoir installé les éléments suivants avant de commencer :
 
 - Pour mettre à jour les packages, cmd **composer update**
 
+## Extensions visual studio code
+
+- PHP Intelephense
+- Twig language 2
+- PHP
+  
 ## Symfony
 
 - [Page Setup](https://symfony.com/doc/current/setup.html)
